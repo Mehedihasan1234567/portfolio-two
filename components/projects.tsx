@@ -1,37 +1,46 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Github, ExternalLink } from "lucide-react"
+import { motion } from "framer-motion";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Github, ExternalLink } from "lucide-react";
 
 const projects = [
   {
-    title: "Project One",
-    description: "A brief description of your first project. Highlight the key features and technologies used.",
-    image: "/placeholder.svg?height=200&width=400",
-    github: "https://github.com/yourusername/project-one",
-    live: "https://project-one-demo.com",
-    tags: ["React", "Next.js", "Tailwind CSS"],
+    title: "Zantrik",
+    description:
+      "A brief description of your first project. Highlight the key features and technologies used.",
+    image: "/zantrik.png",
+
+    live: "https://zantrik.com/",
+    tags: ["React", "Next.js", "Tailwind CSS", "TypeScript"],
   },
   {
-    title: "Project Two",
+    title: "MyGarage",
     description:
       "Description of your second project. Explain what problem it solves and how you approached the solution.",
-    image: "/placeholder.svg?height=200&width=400",
+    image: "/mygarage.png",
     github: "https://github.com/yourusername/project-two",
-    live: "https://project-two-demo.com",
-    tags: ["TypeScript", "Node.js", "MongoDB"],
+    live: "https://mygarage.zantrik.com/",
+    tags: ["Next.js", "TypeScript", "prismic"],
   },
   {
     title: "Project Three",
-    description: "Overview of your third project. Discuss any challenges you faced and how you overcame them.",
+    description:
+      "Overview of your third project. Discuss any challenges you faced and how you overcame them.",
     image: "/placeholder.svg?height=200&width=400",
     github: "https://github.com/yourusername/project-three",
     live: "https://project-three-demo.com",
     tags: ["React Native", "Firebase", "Redux"],
   },
-]
+];
 
 export function Projects() {
   return (
@@ -46,8 +55,8 @@ export function Projects() {
         >
           <h2 className="text-3xl font-bold mb-4">My Projects</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Here are some of the projects I've worked on. Each one has taught me something new and helped me grow as a
-            developer.
+            Here are some of the projects I've worked on. Each one has taught me
+            something new and helped me grow as a developer.
           </p>
         </motion.div>
 
@@ -73,21 +82,22 @@ export function Projects() {
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
                     {project.tags.map((tag) => (
-                      <span key={tag} className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full">
+                      <span
+                        key={tag}
+                        className="px-2 py-1 bg-primary/10 text-primary text-xs rounded-full"
+                      >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </CardContent>
                 <CardFooter className="flex justify-between">
-                  <Button variant="outline" size="sm" asChild>
-                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                      <Github className="mr-2 h-4 w-4" />
-                      GitHub
-                    </a>
-                  </Button>
                   <Button size="sm" asChild>
-                    <a href={project.live} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
                       <ExternalLink className="mr-2 h-4 w-4" />
                       Live Demo
                     </a>
@@ -99,6 +109,5 @@ export function Projects() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

@@ -1,16 +1,18 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
+import { motion } from "framer-motion";
+import { Card, CardContent } from "@/components/ui/card";
 
 const technologies = [
   { name: "React", icon: "⚛️" },
   { name: "Next.js", icon: "▲" },
   { name: "TypeScript", icon: "📘" },
   { name: "Tailwind CSS", icon: "🎨" },
-  { name: "Node.js", icon: "🟢" },
+  { name: "Prismic", icon: "🪄" },
+  { name: "Prisma", icon: "🔷" },
+  { name: "PostgreSQL", icon: "🐘" },
   { name: "MongoDB", icon: "🍃" },
-]
+];
 
 export function TechStack() {
   return (
@@ -29,7 +31,7 @@ export function TechStack() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 items-cente justify-centerr gap-4">
           {technologies.map((tech, index) => (
             <motion.div
               key={tech.name}
@@ -40,7 +42,9 @@ export function TechStack() {
             >
               <Card className="group hover:border-primary/50 transition-colors">
                 <CardContent className="p-6 text-center">
-                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">{tech.icon}</div>
+                  <div className="text-4xl mb-4 group-hover:scale-110 transition-transform">
+                    {tech.icon}
+                  </div>
                   <h3 className="font-medium">{tech.name}</h3>
                 </CardContent>
               </Card>
@@ -49,6 +53,5 @@ export function TechStack() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
