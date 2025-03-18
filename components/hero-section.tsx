@@ -4,6 +4,8 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Download, Github, Linkedin, Twitter } from "lucide-react";
 import { AnimatedText } from "./animated-text";
+import Image from "next/image";
+import Link from "next/link";
 
 export function HeroSection() {
   return (
@@ -22,27 +24,25 @@ export function HeroSection() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", duration: 0.8 }}
-          className="w-32 h-32 rounded-full border-4 border-primary/20 p-1 mx-auto mb-8"
+          className="w-32 h-32 rounded-full border-4 border-primary/20 p-1 mx-auto mb-8 relative overflow-hidden"
         >
-          <img
-            src="/profile.jpg"
-            alt="Profile"
-            className="rounded-full w-full h-full object-cover"
+          <Image
+            src="/profile.jpeg"
+            alt="Mehedi Hassan's profile picture"
+            fill
+            priority
+            sizes="(max-width: 128px) 100vw, 128px"
+            className="object-cover"
           />
         </motion.div>
 
-        <h1 className="text-3xl md:text-4xl font-bold mb-2 text-primary">
-          <AnimatedText text="Hello It's Me" />
+        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent tracking-tight">
+          Mehedi Hassan
         </h1>
 
-        <motion.h2
-          className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/50 bg-clip-text text-transparent"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-        >
-          Mehedi Hassan
-        </motion.h2>
+        <p className="text-lg md:text-xl text-muted-foreground mt-4 max-w-2xl leading-relaxed">
+          Frontend Developer | Building beautiful and functional web experiences
+        </p>
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -64,20 +64,58 @@ export function HeroSection() {
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <Button size="lg" className="rounded-full">
-              <Download className="mr-2 h-4 w-4" />
-              Download CV
+            <Button size="lg" className="rounded-full" asChild>
+              <Link href="/cv.pdf" download>
+                <Download className="mr-2 h-4 w-4" />
+                Download CV
+              </Link>
             </Button>
 
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Github className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+                asChild
+              >
+                <Link
+                  href="https://github.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Profile"
+                >
+                  <Github className="h-5 w-5" />
+                </Link>
               </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Linkedin className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+                asChild
+              >
+                <Link
+                  href="https://linkedin.com/in/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
+                >
+                  <Linkedin className="h-5 w-5" />
+                </Link>
               </Button>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Twitter className="h-5 w-5" />
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full"
+                asChild
+              >
+                <Link
+                  href="https://twitter.com/yourusername"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Twitter Profile"
+                >
+                  <Twitter className="h-5 w-5" />
+                </Link>
               </Button>
             </div>
           </div>

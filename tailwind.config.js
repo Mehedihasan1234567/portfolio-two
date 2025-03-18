@@ -1,7 +1,14 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: ["class"],
-  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
+  content: [
+    "./pages/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./src/**/*.{ts,tsx}",
+    "./app/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     container: {
       center: true,
@@ -43,8 +50,25 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            color: theme("colors.foreground"),
+            a: {
+              color: theme("colors.primary"),
+              "&:hover": {
+                color: theme("colors.primary/80"),
+              },
+            },
+          },
+        },
+      }),
+      textShadow: {
+        sm: "1px 1px 2px rgba(0, 0, 0, 0.1)",
+        DEFAULT: "2px 2px 4px rgba(0, 0, 0, 0.1)",
+        lg: "4px 4px 8px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-}
-
+  plugins: [require("tailwindcss-animate"), require("@tailwindcss/typography")],
+};
