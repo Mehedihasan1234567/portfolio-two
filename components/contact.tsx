@@ -15,6 +15,8 @@ import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
+// This import will now correctly reference the Server Action
+import { sendEmail } from "@/app/utils/sendEmail.server";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -51,42 +53,38 @@ export function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Validate all fields
-    const isValid = Object.entries(formState).every(([key, value]) =>
-      validateField(key as keyof ContactFormState, value)
-    );
+    const validationResult = contactSchema.safeParse(formState);
 
-    if (!isValid) {
+    if (!validationResult.success) {
+      const fieldErrors: Partial<Record<keyof ContactFormState, string>> = {};
+      validationResult.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as keyof ContactFormState] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
       toast.error("Please fix the form errors before submitting");
       return;
     }
 
+    setErrors({}); // Clear previous errors if any successful parse
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formState),
+      // This now calls the Server Action
+      await sendEmail({
+        name: formState.name,
+        email: formState.email,
+        message: formState.message,
       });
-
-      if (!response.ok) {
-        const errorData = await response.json().catch(() => null);
-        throw new Error(errorData?.message || "Failed to send message");
-      }
-
-      const data = await response.json();
-      toast.success("Message sent successfully! I'll get back to you soon.");
-      setFormState({ name: "", email: "", message: "" });
-      setErrors({});
+      toast.success("Message sent successfully!");
+      setFormState({ name: "", email: "", message: "" }); // Reset form
     } catch (error) {
-      console.error("Error sending message:", error);
+      // Display the error message thrown by the server action or a generic one
       toast.error(
         error instanceof Error
           ? error.message
-          : "Failed to send message. Please try again."
+          : "Failed to send message. Please try again later."
       );
     } finally {
       setIsSubmitting(false);
@@ -98,7 +96,8 @@ export function Contact() {
   ) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
-    validateField(name as keyof ContactFormState, value);
+    // Optionally, validate on change or rely on blur/submit
+    // validateField(name as keyof ContactFormState, value);
   };
 
   const handleBlur = (
@@ -182,7 +181,7 @@ export function Contact() {
                       value={formState.name}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      required
+                      // `required` attribute is good, but Zod handles primary validation
                       className={errors.name ? "border-destructive" : ""}
                       aria-invalid={!!errors.name}
                       aria-describedby={errors.name ? "name-error" : undefined}
@@ -204,7 +203,6 @@ export function Contact() {
                       value={formState.email}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      required
                       className={errors.email ? "border-destructive" : ""}
                       aria-invalid={!!errors.email}
                       aria-describedby={
@@ -227,7 +225,6 @@ export function Contact() {
                       value={formState.message}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      required
                       className={errors.message ? "border-destructive" : ""}
                       aria-invalid={!!errors.message}
                       aria-describedby={

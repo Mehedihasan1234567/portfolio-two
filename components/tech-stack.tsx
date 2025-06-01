@@ -148,7 +148,7 @@ export function TechStack() {
           }
           className="space-y-8"
         >
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
             {categories.map((category) => (
               <TabsTrigger
                 key={category}
