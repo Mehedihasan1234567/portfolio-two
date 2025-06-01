@@ -1,5 +1,5 @@
 // app/utils/sendEmail.server.ts
-"use server"; // <--- Add this line to make functions in this file Server Actions
+"use server";
 
 import nodemailer from "nodemailer";
 
@@ -34,8 +34,8 @@ export async function sendEmail({
     // Adjust this based on your email provider's specific requirements.
     secure: process.env.EMAIL_PORT === "465", // Example: true if port is 465
     auth: {
-      user: process.env.EMAIL_USER, // Your sending email address
-      pass: process.env.EMAIL_PASS, // Your email password or app password
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS,
     },
     // Example for port 587 if needed:
     // tls: {
@@ -45,7 +45,7 @@ export async function sendEmail({
 
   const mailOptions = {
     from: `"Contact Form" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_RECIPIENT ?? process.env.EMAIL_USER,
+    to: process.env.EMAIL_USER,
     replyTo: email,
     subject: "📬 New Contact Form Submission",
     html: `
