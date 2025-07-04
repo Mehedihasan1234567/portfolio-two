@@ -1,4 +1,3 @@
-// app/utils/sendEmail.server.ts
 "use server";
 
 import nodemailer from "nodemailer";
@@ -12,7 +11,6 @@ export async function sendEmail({
   email: string;
   message: string;
 }) {
-  // Validate essential environment variables
   if (
     !process.env.EMAIL_HOST ||
     !process.env.EMAIL_PORT ||
@@ -30,17 +28,12 @@ export async function sendEmail({
   const transporter = nodemailer.createTransport({
     host: process.env.EMAIL_HOST,
     port: Number(process.env.EMAIL_PORT),
-    // `secure: true` is generally for port 465. For 587, it's usually `false` with `tls: { ciphers:'SSLv3' }` or `starttls: true`
-    // Adjust this based on your email provider's specific requirements.
-    secure: process.env.EMAIL_PORT === "465", // Example: true if port is 465
+
+    secure: process.env.EMAIL_PORT === "465",
     auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
-    // Example for port 587 if needed:
-    // tls: {
-    //   rejectUnauthorized: false, // Or configure ciphers if needed
-    // },
   });
 
   const mailOptions = {
@@ -70,9 +63,9 @@ export async function sendEmail({
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log(`Email sent successfully from ${name} <${email}>`); // Server-side log
+    console.log(`Email sent successfully from ${name} <${email}>`);
   } catch (error) {
-    console.error("Nodemailer failed to send email:", error); // Detailed server-side error log
+    console.error("Nodemailer failed to send email:", error);
     throw new Error(
       "Sorry, there was an issue sending your message. Please try again later."
     );

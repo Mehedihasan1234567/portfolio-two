@@ -15,7 +15,7 @@ import { Button } from "@/components/ui/button";
 import { Mail, Phone, MapPin, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { z } from "zod";
-// This import will now correctly reference the Server Action
+
 import { sendEmail } from "@/app/utils/sendEmail.server";
 
 const contactSchema = z.object({
@@ -67,20 +67,18 @@ export function Contact() {
       return;
     }
 
-    setErrors({}); // Clear previous errors if any successful parse
+    setErrors({});
     setIsSubmitting(true);
 
     try {
-      // This now calls the Server Action
       await sendEmail({
         name: formState.name,
         email: formState.email,
         message: formState.message,
       });
       toast.success("Message sent successfully!");
-      setFormState({ name: "", email: "", message: "" }); // Reset form
+      setFormState({ name: "", email: "", message: "" });
     } catch (error) {
-      // Display the error message thrown by the server action or a generic one
       toast.error(
         error instanceof Error
           ? error.message
@@ -96,8 +94,6 @@ export function Contact() {
   ) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
-    // Optionally, validate on change or rely on blur/submit
-    // validateField(name as keyof ContactFormState, value);
   };
 
   const handleBlur = (
@@ -108,7 +104,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-20 bg-muted/40">
+    <section id="contact" className="py-10 bg-muted/40">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -181,7 +177,6 @@ export function Contact() {
                       value={formState.name}
                       onChange={handleChange}
                       onBlur={handleBlur}
-                      // `required` attribute is good, but Zod handles primary validation
                       className={errors.name ? "border-destructive" : ""}
                       aria-invalid={!!errors.name}
                       aria-describedby={errors.name ? "name-error" : undefined}

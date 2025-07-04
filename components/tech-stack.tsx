@@ -16,7 +16,7 @@ interface Technology {
   name: string;
   icon: string;
   level: "Beginner" | "Intermediate" | "Advanced" | "Expert";
-  category: "Frontend" | "Backend" | "Database" | "Tools";
+  category: "Frontend" | "Backend" | "Database" | "Tools" | "CMS";
   description?: string;
   yearStarted?: number;
 }
@@ -25,11 +25,11 @@ const technologies: Technology[] = [
   {
     name: "React",
     icon: "/icons/react.svg",
-    level: "Expert",
+    level: "Advanced",
     category: "Frontend",
     description:
       "Building modern, responsive web applications with React and its ecosystem",
-    yearStarted: 2020,
+    yearStarted: 2022,
   },
   {
     name: "Next.js",
@@ -38,7 +38,7 @@ const technologies: Technology[] = [
     category: "Frontend",
     description:
       "Creating server-side rendered and static websites with optimized performance",
-    yearStarted: 2021,
+    yearStarted: 2023,
   },
   {
     name: "TypeScript",
@@ -47,24 +47,24 @@ const technologies: Technology[] = [
     category: "Frontend",
     description:
       "Writing type-safe code to reduce bugs and improve development experience",
-    yearStarted: 2021,
+    yearStarted: 2023,
   },
   {
     name: "Tailwind CSS",
     icon: "/icons/tailwind.svg",
-    level: "Expert",
+    level: "Advanced",
     category: "Frontend",
     description:
       "Crafting beautiful, responsive UIs with utility-first CSS framework",
-    yearStarted: 2021,
+    yearStarted: 2023,
   },
   {
     name: "Node.js",
     icon: "/icons/nodejs.svg",
-    level: "Advanced",
+    level: "Beginner",
     category: "Backend",
     description: "Building scalable server-side applications and APIs",
-    yearStarted: 2020,
+    yearStarted: 2024,
   },
   {
     name: "Prisma",
@@ -72,7 +72,7 @@ const technologies: Technology[] = [
     level: "Intermediate",
     category: "Backend",
     description: "Type-safe database access and schema management",
-    yearStarted: 2022,
+    yearStarted: 2024,
   },
   {
     name: "PostgreSQL",
@@ -80,7 +80,7 @@ const technologies: Technology[] = [
     level: "Intermediate",
     category: "Database",
     description: "Robust relational database for complex data relationships",
-    yearStarted: 2021,
+    yearStarted: 2024,
   },
   {
     name: "MongoDB",
@@ -88,7 +88,7 @@ const technologies: Technology[] = [
     level: "Intermediate",
     category: "Database",
     description: "NoSQL database for flexible schema design and scalability",
-    yearStarted: 2020,
+    yearStarted: 2024,
   },
   {
     name: "Git",
@@ -96,11 +96,29 @@ const technologies: Technology[] = [
     level: "Advanced",
     category: "Tools",
     description: "Version control and collaborative development workflows",
-    yearStarted: 2019,
+    yearStarted: 2022,
+  },
+  {
+    name: "Github",
+    icon: "/icons/github.svg",
+    level: "Advanced",
+    category: "Tools",
+    description:
+      "Utilizing a web-based platform for hosting Git repositories, automating CI/CD workflows, and fostering collaborative development.",
+    yearStarted: 2022,
+  },
+  {
+    name: "Prismic",
+    icon: "/icons/prismic.svg",
+    level: "Intermediate",
+    category: "CMS",
+    description:
+      "Empowering content teams with a headless CMS to build high-performance websites.",
+    yearStarted: 2024,
   },
 ];
 
-const categories = ["Frontend", "Backend", "Database", "Tools"] as const;
+const categories = ["Frontend", "Backend", "Database", "Tools", "CMS"] as const;
 
 const levelColors = {
   Beginner: "text-blue-400 bg-blue-400/10",
@@ -124,17 +142,19 @@ export function TechStack() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <section id="tech-stack" className="py-20 bg-muted/40">
-      <div className="container px-4">
+    <section id="tech-stack" className="py-8 sm:py-10 bg-muted/40">
+      <div className="container px-4 sm:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-8 sm:mb-12"
         >
-          <h2 className="text-3xl font-bold mb-4">Tech Stack</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4">
+            Tech Stack
+          </h2>
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-2">
             Here are the technologies I work with to bring ideas to life. Hover
             over each technology to learn more about my experience.
           </p>
@@ -146,14 +166,14 @@ export function TechStack() {
           onValueChange={(value) =>
             setSelectedCategory(value as (typeof categories)[number])
           }
-          className="space-y-8"
+          className="space-y-6 sm:space-y-8"
         >
-          <TabsList className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16">
+          <TabsList className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4 mb-8 sm:mb-16 h-auto p-1 sm:p-2">
             {categories.map((category) => (
               <TabsTrigger
                 key={category}
                 value={category}
-                className="w-full data-[state=active]:bg-primary/20"
+                className="w-full px-2 sm:px-3 py-2 sm:py-2.5 text-xs sm:text-sm data-[state=active]:bg-primary/20 h-auto"
               >
                 {category}
               </TabsTrigger>
@@ -165,9 +185,9 @@ export function TechStack() {
               <TabsContent
                 key={category}
                 value={category}
-                className="space-y-8"
+                className="space-y-6 sm:space-y-8"
               >
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
                   {technologies
                     .filter((tech) => tech.category === category)
                     .map((tech, index) => (
@@ -189,10 +209,9 @@ export function TechStack() {
                                   : "hover:shadow-md"
                               )}
                             >
-                              <CardContent className="p-6">
-                                <div className="flex items-start space-x-4">
-                                  <div className="relative w-12 h-12 flex-shrink-0">
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                              <CardContent className="p-4 sm:p-6">
+                                <div className="flex items-start space-x-3 sm:space-x-4">
+                                  <div className="relative w-10 h-10 sm:w-12 sm:h-12 flex-shrink-0">
                                     <img
                                       src={tech.icon}
                                       alt={`${tech.name} icon`}
@@ -200,27 +219,27 @@ export function TechStack() {
                                     />
                                   </div>
                                   <div className="flex-1 min-w-0">
-                                    <h3 className="font-medium truncate">
+                                    <h3 className="font-medium truncate text-sm sm:text-base">
                                       {tech.name}
                                     </h3>
-                                    <div className="mt-1 flex items-center">
+                                    <div className="mt-1 sm:mt-1 flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-0">
                                       <span
                                         className={cn(
-                                          "inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium",
+                                          "inline-flex items-center px-2 py-0.5 sm:px-2.5 rounded-full text-xs font-medium w-fit",
                                           levelColors[tech.level]
                                         )}
                                       >
                                         {tech.level}
                                       </span>
                                       {tech.yearStarted && (
-                                        <span className="ml-2 text-xs text-muted-foreground">
+                                        <span className="text-xs text-muted-foreground sm:ml-2">
                                           {currentYear - tech.yearStarted}+
                                           years
                                         </span>
                                       )}
                                     </div>
                                     {tech.description && (
-                                      <p className="mt-2 text-sm text-muted-foreground line-clamp-2">
+                                      <p className="mt-2 text-xs sm:text-sm text-muted-foreground line-clamp-3 sm:line-clamp-2">
                                         {tech.description}
                                       </p>
                                     )}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ThemeToggle } from "@/components/theme-toggle";
@@ -9,7 +9,6 @@ import type React from "react";
 import { Toaster } from "sonner";
 import { Analytics } from "@vercel/analytics/react";
 
-const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
@@ -136,7 +135,7 @@ export default function RootLayout({
                 <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
                   Built by{" "}
                   <a
-                    href="https://mehedihasan.dev"
+                    href="/"
                     target="_blank"
                     rel="noreferrer"
                     className="font-medium underline underline-offset-4"

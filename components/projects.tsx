@@ -27,34 +27,27 @@ const projects: Project[] = [
   {
     title: "Zantrik",
     description:
-      "A modern web platform for automotive services, built with cutting-edge technologies.",
+      "Zantrik is Bangladesh's leading car maintenance platform, offering a one-stop solution for all vehicle needs. Through its app and website, Zantrik provides a wide range of services, including repairs, roadside assistance, and vehicle certification, ensuring convenience, reliability, and transparency for car owners across the country.",
     image: "/zantrik.png",
     live: "https://zantrik.com/",
 
-    tags: [
-      "React",
-      "Next.js",
-      "Tailwind CSS",
-      "TypeScript",
-      "prismic",
-      "prisma",
-    ],
+    tags: ["Next.js", "Tailwind CSS", "TypeScript", "prismic"],
   },
   {
     title: "MyGarage",
     description:
-      "A comprehensive vehicle management system with seamless integration and intuitive UI.",
+      "This is an investment platform for 'digital garages.' It allows individuals to invest in Zantrik's network of garages, which use the Zantrik App to manage car maintenance and repair services. Investors can earn a return on their investment and contribute to modernizing the automobile maintenance industry in Bangladesh.",
     image: "/mygarage.png",
     live: "https://mygarage.zantrik.com/",
-    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Prismic", "prisma"],
+    tags: ["Next.js", "Tailwind CSS", "TypeScript", "Prismic"],
   },
   {
-    title: "Project Three",
+    title: "Zantrik Certified Car",
     description:
-      "An innovative solution showcasing modern web development practices and clean architecture.",
-    image: "/placeholder.svg?height=200&width=400",
-    live: "https://project-three-demo.com",
-    tags: ["React Native", "Firebase", "Redux"],
+      "This website is for 'Zantrik Certified Car,' a service that provides a health condition report for your car. This certification can help you get repair cost coverage and sell your car more quickly. This is a service offered by Zantrik, a car maintenance platform in Bangladesh.",
+    image: "/certify-zantrik.png",
+    live: "https://certify.zantrik.com/",
+    tags: ["Next.js", "Shadcn UI", "Tailwind CSS", "TypeScript", "Redux"],
   },
 ];
 
@@ -66,7 +59,7 @@ export function Projects() {
   };
 
   return (
-    <section id="projects" className="py-20 bg-muted/40">
+    <section id="projects" className="md:py-16 bg-muted/40">
       <div className="container px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

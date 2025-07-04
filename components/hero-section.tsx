@@ -2,18 +2,29 @@
 
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Download, Github, Linkedin, Twitter } from "lucide-react";
-import { AnimatedText } from "./animated-text";
+import { Download, Github, Linkedin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+const XIcon = ({ className }: { className?: string }) => (
+  <svg
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    className={className}
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+  </svg>
+);
+
 export function HeroSection() {
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden">
-      {/* Background gradient */}
+    <section
+      id="about"
+      className=" py-24 md:py-32 flex flex-col justify-center items-center relative overflow-hidden"
+    >
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-background to-background" />
 
-      {/* Content */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -24,14 +35,14 @@ export function HeroSection() {
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
           transition={{ type: "spring", duration: 0.8 }}
-          className="w-32 h-32 rounded-full border-4 border-primary/20 p-1 mx-auto mb-8 relative overflow-hidden"
+          className="w-40 h-40 rounded-full border-4 border-primary/20 p-1 mx-auto mb-8 relative overflow-hidden"
         >
           <Image
             src="/profile.jpeg"
             alt="Mehedi Hassan's profile picture"
             fill
             priority
-            sizes="(max-width: 128px) 100vw, 128px"
+            sizes="(max-width: 150px) 100vw, 150px"
             className="object-cover"
           />
         </motion.div>
@@ -65,7 +76,11 @@ export function HeroSection() {
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
             <Button size="lg" className="rounded-full" asChild>
-              <Link href="/cv.pdf" download>
+              <Link
+                href="https://drive.google.com/file/d/1qlcrsSkfRjXxnq6JpRzmApQVyo4ACtKY/view?usp=sharing"
+                download
+                target="_blank"
+              >
                 <Download className="mr-2 h-4 w-4" />
                 Download CV
               </Link>
@@ -79,7 +94,7 @@ export function HeroSection() {
                 asChild
               >
                 <Link
-                  href="https://github.com/yourusername"
+                  href="https://github.com/Mehedihasan1234567"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="GitHub Profile"
@@ -94,7 +109,7 @@ export function HeroSection() {
                 asChild
               >
                 <Link
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://www.linkedin.com/in/mehedi-hasan-b04b56249/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn Profile"
@@ -109,19 +124,18 @@ export function HeroSection() {
                 asChild
               >
                 <Link
-                  href="https://twitter.com/yourusername"
+                  href="https://x.com/Hasa96496Hasan"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Twitter Profile"
                 >
-                  <Twitter className="h-5 w-5" />
+                  <XIcon className="h-5 w-5" />
                 </Link>
               </Button>
             </div>
           </div>
         </motion.div>
 
-        {/* Scroll indicator */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: [0, 10, 0] }}
